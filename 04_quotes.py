@@ -49,12 +49,13 @@ class CustomConsole(code.InteractiveConsole):
         return False
 
 
-# For tab completion and arrow key support
-if sys.platform != "win32":
-    import readline
+if "-i" in sys.orig_argv:
+    # For tab completion and arrow key support
+    if sys.platform != "win32":
+        import readline
 
-    readline.parse_and_bind("tab: complete")
+        readline.parse_and_bind("tab: complete")
 
-CustomConsole().interact(banner="", exitmsg="")
-# To kill interactive mode, if -i flag was passed
-os._exit(0)
+    CustomConsole().interact(banner="", exitmsg="")
+    # To kill interactive mode, if -i flag was passed
+    os._exit(0)
